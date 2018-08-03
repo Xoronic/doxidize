@@ -122,14 +122,42 @@ pub fn build(config: &Config, log: &Logger) -> Result<()> {
             config
                 .handlebars()
                 .render(
-                    "page",
+                    "base",
                     &json!({
                         "contents": rendered_contents,
                         "nest-count": nesting_count,
                         "base-url": base_url,
                         "menu": menu,
                         "title": doc_markdown.title.clone(),
-                        "site-title": target.name.clone()
+                        "site-title": target.name.clone(),
+                        "theme": {
+                            "colors": {
+                                "primary": "#93C",
+                                "secondary": "#A6C",
+                                "on-dark": "#fff",
+                                "on-light": "#999",
+                                "bg-light": "#fafafa",
+                            }
+                        },
+                        // "theme": {
+                        //     "colors": {
+                        //         "primary": "#094074",
+                        //         "secondary": "#3c6997",
+                        //         "on-dark": "#fff",
+                        //         "on-light": "#999",
+                        //         "bg-light": "#f3f3f3",
+                        //     }
+                        // },
+                        // "theme": {
+                        //     "colors": {
+                        //         "primary": "#275e86",
+                        //         "secondary": "#3581b8",
+                        //         "on-dark": "#fff",
+                        //         "on-light": "#2d3047",
+                        //         "bg-light": "#fffefc",
+                        //     }
+                        // }
+
                     }),
                 )?
                 .as_bytes(),

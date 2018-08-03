@@ -1,0 +1,162 @@
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Fira+Sans');
+
+    body {
+        font-family: 'Fira Sans', sans-serif;
+        background: {{theme.colors.bg-light}};
+    }
+
+    p {
+        font-family: 'Fira Sans', sans-serif;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 1.7em;
+        color: {{theme.colors.on-light}};
+    }
+
+    a,
+    a:hover,
+    a:focus {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .navbar {
+        padding: 15px 10px;
+        background: {{theme.colors.bg-light}};
+        border: none;
+        border-radius: 0;
+        margin-bottom: 40px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btn {
+        box-shadow: none;
+        outline: none !important;
+        border: none;
+    }
+
+    .line {
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px dashed #ddd;
+        margin: 40px 0;
+    }
+
+    .wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    #sidebar {
+        min-width: 250px;
+        max-width: 250px;
+        background: {{theme.colors.secondary}};
+        color: {{theme.colors.on-dark}};
+    }
+
+    #sidebar.active {
+        margin-left: -250px;
+    }
+
+    #sidebar .sidebar-header {
+        padding: 20px;
+        background: {{theme.colors.primary}};
+    }
+
+    #sidebar ul.components {
+        padding: 20px 0;
+        border-bottom: 1px solid {{theme.colors.primary}};
+    }
+
+    #sidebar ul p {
+        color: {{theme.colors.on-dark}};
+        padding: 10px;
+    }
+
+    #sidebar ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+    }
+
+    #sidebar ul li a:hover {
+        color: {{theme.colors.primary}};
+        background: {{theme.colors.bg-light}};
+    }
+
+    #sidebar ul li.active>a,
+    a[aria-expanded="true"] {
+        color: {{theme.colors.on-dark}};
+        background: {{theme.colors.primary}};
+    }
+
+    a[data-toggle="collapse"] {
+        position: relative;
+    }
+
+    a[aria-expanded="false"]::before,
+    a[aria-expanded="true"]::before {
+        content: '▼';
+        display: block;
+        position: absolute;
+        right: 20px;
+    }
+
+    a[aria-expanded="true"]::before {
+        content: '▲';
+    }
+
+    #sidebar ul ul a {
+        font-size: 0.9em !important;
+        padding-left: 30px !important;
+        background: {{theme.colors.primary}};
+    }
+
+    #content {
+        padding: 20px;
+        min-height: 100vh;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        max-width: 48rem;
+    }
+
+    blockquote {
+        background: {{color-bg-light}};
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+    }
+
+    blockquote:before {
+        color: #ccc;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    blockquote p {
+        display: inline;
+    }
+
+    @media (max-width: 768px) {
+        #sidebar {
+            margin-left: -250px;
+        }
+        #sidebar.active {
+            margin-left: 0;
+        }
+        #sidebarCollapse span {
+            display: none;
+        }
+        #content {
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+    }
+</style>

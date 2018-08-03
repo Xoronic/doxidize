@@ -90,8 +90,14 @@ fn default_handlebars() -> Handlebars {
         };
     }
 
+    // HTML
+    template!(handlebars, "base", "templates/html/base.hbs");
+    template!(handlebars, "script", "templates/html/partials/script.hbs");
+    template!(handlebars, "sidebar", "templates/html/partials/sidebar.hbs");
+    template!(handlebars, "style", "templates/html/partials/style.hbs");
+
+    // Markdown
     template!(handlebars, "example", "templates/markdown/example.hbs");
-    template!(handlebars, "page", "templates/html/page.hbs");
     template!(handlebars, "api", "templates/markdown/api.hbs");
     template!(handlebars, "mod", "templates/markdown/mod.hbs");
     template!(handlebars, "struct", "templates/markdown/struct.hbs");
@@ -107,12 +113,14 @@ fn default_handlebars() -> Handlebars {
         Box::new(
             |h: &handlebars::Helper,
              _: &Handlebars,
-             rc: &mut handlebars::RenderContext|
+             _: &handlebars::Context,
+             _: &mut handlebars::RenderContext,
+             out: &mut handlebars::Output|
              -> handlebars::HelperResult {
                 let count = h.param(0).map(|v| v.value().as_u64().unwrap()).unwrap();
 
                 for _ in 0..count {
-                    rc.writer.write_all(b"../")?;
+                    out.write("../")?;
                 }
 
                 Ok(())

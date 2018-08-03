@@ -1,0 +1,64 @@
+<script>hljs.initHighlightingOnLoad();</script>
+<script>
+    $(".sidebarItem").on("hide.bs.collapse", function () {
+        var id = $(this).attr("id");
+        var openItems = JSON.parse(localStorage.getItem("doxidize.openSidebarItems")) || [];
+        var index = openItems.indexOf(id);
+        if (index !== -1) {
+            openItems.splice(index, 1);
+            localStorage.setItem("doxidize.openSidebarItems", JSON.stringify(openItems));
+        }
+    });
+
+    $(".sidebarItem").on("show.bs.collapse", function () {
+        var id = $(this).attr("id");
+        var openItems = JSON.parse(localStorage.getItem("doxidize.openSidebarItems")) || [];
+        if (openItems.indexOf(id) === -1) {
+            openItems.push(id);
+            localStorage.setItem("doxidize.openSidebarItems", JSON.stringify(openItems));
+        }
+    });
+
+    var openItems = JSON.parse(localStorage.getItem("doxidize.openSidebarItems"));
+    if (!openItems) {
+        var item = $(".sidebarItem").first();
+        item.collapse("show");
+    } else {
+        for (var i = 0; i < openItems.length; i++) {
+            var item = $("#" + openItems[i]);
+            if (item.hasClass("sidebarItem")) {
+                // Apply the class and attribute manually so it doesn't animate.
+                item.addClass("show")
+                item.attr("aria-expanded", true);
+            }
+        }
+    }
+
+    var hiding_character = "#";
+    Array.from(document.querySelectorAll("code.language-rust")).forEach(function (block) {
+        var code_block = block;
+        // hide lines
+        var lines = code_block.innerHTML.split("\n");
+        var first_non_hidden_line = false;
+        var lines_hidden = false;
+
+        for (var n = 0; n < lines.length; n++) {
+            if (lines[n].trim()[0] == hiding_character) {
+                if (first_non_hidden_line) {
+                    lines[n] = "<span class=\"hidden\">" + "\n" + lines[n].replace(/(\s*)# ?/, "$1") + "</span>";
+                }
+                else {
+                    lines[n] = "<span class=\"hidden\">" + lines[n].replace(/(\s*)# ?/, "$1") + "\n" + "</span>";
+                }
+                lines_hidden = true;
+            }
+            else if (first_non_hidden_line) {
+                lines[n] = "\n" + lines[n];
+            }
+            else {
+                first_non_hidden_line = true;
+            }
+        }
+        code_block.innerHTML = lines.join("");
+    });
+</script>
