@@ -1,0 +1,37 @@
+<nav id="sidebar">
+    <div class="sidebar-header">
+        <h3>Doxidize</h3>
+    </div>
+
+    <ul class="list-unstyled components">
+        {{#each menu}}
+        <li>
+            <a href="#{{this.slug}}" data-toggle="collapse" aria-expanded="false">{{this.title}}</a>
+            <ul class="sidebarItem collapse list-unstyled" id="{{this.slug}}">
+                {{#each this.contents}}
+                <li>
+                    <a href="{{up-dir ../../nest-count }}{{ ../../base-url }}{{this.target}}">{{this.title}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </li>
+        {{/each}}
+        <li>
+            <a href="#api" data-toggle="collapse" aria-expanded="false">API reference</a>
+            <ul class="sidebarItem collapse list-unstyled" id="api">
+                <li>
+                    <a href="{{up-dir nest-count}}{{ base-url }}api/index.html">Overview</a>
+                </li>
+                <li>
+                    <a href="{{up-dir nest-count}}{{ base-url }}api/module-overview.html">All Modules</a>
+                </li>
+                <li>
+                    <a href="{{up-dir nest-count}}{{ base-url }}api/struct-overview.html">All Structs</a>
+                </li>
+                <li>
+                    <a href="{{up-dir nest-count}}{{ base-url }}api/trait-overview.html">All Traits</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
